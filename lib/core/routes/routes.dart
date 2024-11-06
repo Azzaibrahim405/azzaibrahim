@@ -13,6 +13,7 @@ class Routes {
       services = 'services',
       packages = '/packages',
       layout = '/layout',
+      reservationConfirmationScreen='/ReservationConfirmationScreen',
       editProfile = '/editProfile',
       account = '/account',
       additionsServices = 'additionsServices',

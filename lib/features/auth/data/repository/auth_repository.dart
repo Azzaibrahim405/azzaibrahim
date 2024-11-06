@@ -4,11 +4,8 @@ import 'package:best_touch_training/core/database/remote/api_consumer.dart';
 import 'package:best_touch_training/core/database/remote/api_keys.dart';
 import 'package:best_touch_training/core/database/remote/end_points.dart';
 import 'package:best_touch_training/core/error/exceptions.dart';
-import 'package:best_touch_training/core/routes/routes.dart';
 import 'package:best_touch_training/core/service_locator/service_locator.dart';
-import 'package:best_touch_training/core/utils/common_widgets.dart';
 import 'package:best_touch_training/features/auth/data/models/forget_password_model/forget_password_model/data.dart';
-import 'package:best_touch_training/features/auth/data/models/get_profile_model/get_profile_model/get_profile_model.dart';
 import 'package:best_touch_training/features/auth/data/models/get_profile_model/get_profile_model/profile_data.dart';
 import 'package:best_touch_training/features/auth/data/models/login_model/login_request.dart';
 import 'package:best_touch_training/features/auth/data/models/login_model/user.dart';
@@ -19,8 +16,6 @@ import 'package:best_touch_training/features/auth/data/models/register_model/reg
 import 'package:best_touch_training/features/auth/data/models/verification_code_model/verification_code_data.dart';
 import 'package:best_touch_training/features/auth/data/models/verification_code_model/verification_rerquest.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-
 class AuthRepository {
   Future<Either<String, User>> login(LoginRequest loginRequest) async {
     try {

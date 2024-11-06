@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:best_touch_training/core/routes/routes.dart';
 import 'package:best_touch_training/core/service_locator/service_locator.dart';
 import 'package:best_touch_training/core/shared_widgets/custom_elevated_button.dart';
 import 'package:best_touch_training/core/shared_widgets/custom_loading_indicator.dart';
@@ -37,24 +38,23 @@ class _AdditionsServicesScreenState extends State<AdditionsServicesScreen> {
   void initState() {
     sl<AdditionServicesCubit>().getAdditionsServices(
       serviceId: widget.contentParams.serviceId ?? 0,
-      washerId: widget.contentParams.washerId ?? 1,
-      sizeId: widget.contentParams.sizeId ?? 5,
+      washerId: widget.contentParams.washerId ?? 0,
+      sizeId: widget.contentParams.sizeId ?? 0,
     );
+    cubit.selectedIndex = [];
+    cubit.totalPrice = 0.0;
+    cubit.additionPrice = 0.0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final allPrice = cubit.totalSelectedPaidAdditions +
-        (widget.contentParams.price ?? 0).toDouble();
-        
     log('******${list.toString()} ****');
     log('name is   ${widget.contentParams.name} ');
     log('description is  ${widget.contentParams.description} ');
     log('washer id is  ${widget.contentParams.washerId} ');
     log('service id is  ${widget.contentParams.serviceId} ');
     log('size id is  ${widget.contentParams.sizeId} ');
-    
 
     return BlocConsumer<AdditionServicesCubit, AdditionServicesState>(
       listener: (context, state) {
@@ -67,91 +67,105 @@ class _AdditionsServicesScreenState extends State<AdditionsServicesScreen> {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: SimpleAppBar(
-            context: context,
-            leading: true,
-            title: widget.contentParams.name,
-          ),
-          body: ListView(
-            children: [
-              16.verticalSpace,
-              Text(
-                'الخدمات المقدمة',
-                style: semiBold(size: 16, color: AppColors.labelTextColor),
-              ),
-              Html(
-                data: widget.contentParams.description ?? '',
-              ),
-              24.verticalSpace,
-              Text(
-                list.isEmpty ? "" : 'الخدمات الاضافيه',
-                style: semiBold(size: 16, color: AppColors.labelTextColor),
-              ),
-              state is AdditionServicesLoading
-                  ? const CustomLoadingIndicator()
-                  : SizedBox(
-                      height: 300,
-                      child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          final paidAdditional =
-                              cubit.paidAdditionalList[index];
-
-                          return AdditionsItem(
-                            additionModel: list[index],
-                            value: cubit.isSelectedId(
-                                additionId: paidAdditional.id),
-                            onChanged: (_) {
-                              cubit.toggleCheckbox(paidAdditional.id);
-                            },
-                          );
-                        },
-                        separatorBuilder: (context, index) => 16.verticalSpace,
-                        itemCount: list.length,
-                      ),
-                    ),
-            ],
-          ).paddingAll(16),
-          bottomNavigationBar: Container(
-            color: AppColors.greyLight,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            backgroundColor: Colors.white,
+            appBar: SimpleAppBar(
+              context: context,
+              leading: true,
+              title: widget.contentParams.name,
+            ),
+            body: ListView(
               children: [
+                16.verticalSpace,
+                Text(
+                  'الخدمات المقدمة',
+                  style: semiBold(size: 16, color: AppColors.labelTextColor),
+                ),
+                Html(
+                  data: widget.contentParams.description ?? '',
+                ),
+                24.verticalSpace,
+                Text(
+                  list.isEmpty ? "" : 'الخدمات الاضافيه',
+                  style: semiBold(size: 16, color: AppColors.labelTextColor),
+                ),
+                state is AdditionServicesLoading
+                    ? const CustomLoadingIndicator()
+                    : SizedBox(
+                        height: 300,
+                        child: ListView.separated(
+                          itemBuilder: (context, index) {
+                            return AdditionsItem(
+                                additionModel: list[index],
+                                value: cubit.selectedIndex.contains(index),
+                                onChanged: (bool? val) => cubit.toggleCheckBox(
+                                      isSelected: val! ? true : false,
+                                      price: widget.contentParams.price!
+                                          .toDouble(),
+                                      index: index,
+                                      servicePrice:
+                                          list[index].price!.toDouble(),
+                                    ));
+                                    
+                          },
+                          separatorBuilder: (context, index) =>
+                              16.verticalSpace,
+                          itemCount: list.length,
+                        ),
+                      ),
+              ],
+            ).paddingAll(16),
+            bottomNavigationBar: Container(
+              color: AppColors.greyLight,
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
                 CustomRowWidget(
                   text1: 'السعر',
                   text2: '${widget.contentParams.price} ر.س',
                 ),
                 Visibility(
-                  visible: cubit.totalSelectedPaidAdditions > 0,
+                  visible: cubit.additionPrice > 0,
+                  //cubit.priceAddition > 0.0,
                   child: CustomRowWidget(
-                    text1:'الاضافي',
-                    text2: '${cubit.totalSelectedPaidAdditions} ر.س ',
-                  ),
+                      text1: 'الاضافي', text2: "${cubit.additionPrice}"
+                      //  cubit.priceAddition != 0.0
+                      //     ? cubit.priceAddition.toString()
+                      //     : '',
+                      ),
                 ),
                 Visibility(
-                  visible: cubit.totalSelectedPaidAdditions > 0,
-                  child: const DottedLine(
+                  visible: (cubit.totalPrice > 0 && cubit.additionPrice > 0),
+                  child: DottedLine(
                     dashColor: AppColors.dashLineColor,
                   ),
                 ),
                 Visibility(
-                  visible: cubit.totalSelectedPaidAdditions > 0,
+                  visible: cubit.totalPrice > 0,
+                  //  cubit.totalPrice > 0.0 &&
+                  //     cubit.totalPrice !=
+                  //         widget.contentParams.price?.toDouble(),
                   child: CustomRowWidget(
                     text1: 'الاجمالي',
-                    text2: '$allPrice',
+                    text2: '${cubit.totalPrice}',
+                    // cubit.totalPrice != 0.0
+                    //     ? cubit.totalPrice.toString()
+                    //     : '',
                     totalColor: AppColors.labelTextColor,
                     valueColor: AppColors.primary,
                   ),
                 ),
                 CustomElevatedButton(
                   text: 'احجز',
-                  onPress: () {},
+                  onPress: () {
+                    cubit.additionsList = list;
+                    cubit.contentParams = widget.contentParams;
+                    Navigator.pushNamed(
+                      context,
+                      Routes.reservationConfirmationScreen,
+                    );
+                  },
                 ),
                 5.verticalSpace
-              ],
-            ).paddingHorizontal(15),
-          ),
-        );
+              ]).paddingHorizontal(15),
+            ));
       },
     );
   }

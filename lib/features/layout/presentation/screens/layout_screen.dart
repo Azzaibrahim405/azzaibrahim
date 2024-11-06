@@ -22,7 +22,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       create: (context) => sl<HomeCubit>(),
       child: const HomeScreen(),
     ),
-    const ReservationScreen(),
+     ReservationScreen(),
   ];
   int currentIndex = 0;
 

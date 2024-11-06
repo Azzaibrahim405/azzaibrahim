@@ -5,7 +5,6 @@ import 'package:best_touch_training/core/utils/app_images.dart';
 import 'package:best_touch_training/core/utils/app_text_style.dart';
 import 'package:best_touch_training/core/utils/common_widgets.dart';
 import 'package:best_touch_training/core/utils/extensions.dart';
-import 'package:best_touch_training/features/auth/data/models/get_profile_model/get_profile_model/profile_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

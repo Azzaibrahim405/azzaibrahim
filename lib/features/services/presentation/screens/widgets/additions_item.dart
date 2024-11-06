@@ -13,7 +13,7 @@ final Function(bool?)?onChanged;
    AdditionsItem({super.key,
    required this.additionModel, 
    required this.value, 
-   required this.onChanged});
+    this.onChanged});
 
   var cubit = sl<AdditionServicesCubit>();
 

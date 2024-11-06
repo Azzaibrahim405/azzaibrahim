@@ -1,14 +1,18 @@
-import 'dart:developer';
-
+import 'dart:core';
 import 'package:best_touch_training/features/services/data/models/additions_model/addtions_services_model/addition_model.dart';
 import 'package:best_touch_training/features/services/data/repository/services_repository.dart';
+import 'package:best_touch_training/features/services/presentation/screens/widgets/service_item.dart';
 import 'package:bloc/bloc.dart';
 part 'addition_services_state.dart';
 
 class AdditionServicesCubit extends Cubit<AdditionServicesState> {
-  AdditionServicesCubit(this.servicesRepo) : super(AdditionServicesInitial());
+  AdditionServicesCubit(
+    this.servicesRepo,
+  ) : super(AdditionServicesInitial());
   final ServicesRepository servicesRepo;
- 
+  ContentParams? contentParams;
+  AdditionModel? additionModel;
+  List<AdditionModel> additionsList = [];
   Future<void> getAdditionsServices({
     required int serviceId,
     required int washerId,
@@ -31,48 +35,48 @@ class AdditionServicesCubit extends Cubit<AdditionServicesState> {
     );
   }
 
+  List<int> selectedIndex = [];
+  double additionPrice = 0.0;
+  double totalPrice = 0.0;
 
+  void toggleCheckBox(
+      {required bool isSelected,
+      required int index,
+      required double price,
+      required double servicePrice}) {
+    if (isSelected == true) {
+      selectedIndex.add(index);
+      additionPrice += servicePrice;
 
-
-
-
- List<AdditionModel> additionsList = [];
-  List<int> selectedIds = [];
-  List<AdditionModel> get paidAdditionalList {
-    return additionsList.where((element) => element.isFree == false).toList();
-  }
-
-  bool isSelectedId({required int? additionId}) {
-    return selectedIds.indexWhere((element) => element == additionId) >= 0;
-  }
-
-  List<AdditionModel> get selectedPaidAdditionsList {
-  return  paidAdditionalList
-        .where((element) => isSelectedId(additionId: element.id))
-        .toList();
-  }
-
-  void toggleCheckbox(int? additionId) {
-    final isSelected = isSelectedId(additionId: additionId ?? 0);
-
-    log(isSelected.toString());
-    if (!isSelected) {
-      selectedIds.add(additionId ?? 0);
+      totalPrice = additionPrice + price;
+      emit(ToggleSuccessState());
     } else {
-      selectedIds.removeWhere((element) => element == additionId);
+      selectedIndex.remove(index);
+      additionPrice -= servicePrice;
+      totalPrice = price + additionPrice;
+      emit(ToggleSuccessState());
     }
-    emit(ServiceCheckBox());
-  }
-
-  double get totalSelectedPaidAdditions {
-    var total = 0.0;
-    for (var i = 0; i < selectedIds.length; i++) {
-      final paidAdditionIndex = paidAdditionalList
-          .indexWhere((element) => element.id == selectedIds[i]);
-      if (paidAdditionIndex >= 0) {
-        total += (paidAdditionalList[paidAdditionIndex].price ?? 0);
-      }
-    }
-    return total;
   }
 }
+
+
+//   List<int> selectedIndexes = [];
+//   double priceAddition = 0.0;
+//   double totalPrice = 0.0;
+//   void toggleCheckBoxServices(
+//       {required int index,
+//       required double servicesPrice,
+//       required double price,
+//       required bool isSelected}) {
+//     if (isSelected == true) {
+//       selectedIndexes.add(index);
+//       priceAddition += servicesPrice.toDouble();
+//       totalPrice = price.toDouble() + priceAddition;
+//       emit(toggleSuccess());
+//     } else {
+//       selectedIndexes.remove(index);
+//       priceAddition -= servicesPrice.toDouble();
+//       totalPrice = price.toDouble() + priceAddition;
+//       emit(toggleSuccess());
+//     }
+// }

@@ -38,8 +38,8 @@ class BestTouchApp extends StatelessWidget {
                     BlocProvider(
                         create: (context) => sl<LaundryProfileCubit>()),
                     BlocProvider(create: (context) => sl<ServicesCubit>()),
-                    BlocProvider(
-                        create: (context) => sl<AdditionServicesCubit>()),
+               BlocProvider(create: (context) => sl<AdditionServicesCubit>()),
+
                   ],
                   child: MaterialApp(
                     supportedLocales: const [

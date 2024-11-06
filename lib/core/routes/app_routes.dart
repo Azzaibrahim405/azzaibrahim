@@ -1,4 +1,5 @@
 import 'package:best_touch_training/core/routes/routes.dart';
+import 'package:best_touch_training/core/service_locator/service_locator.dart';
 import 'package:best_touch_training/features/account/presentation/screens/account_view.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/forget_password.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/location_screen.dart';
@@ -14,12 +15,15 @@ import 'package:best_touch_training/features/packages/presentation/screens/packa
 import 'package:best_touch_training/features/profile/presentation/screens/enter_password_screen.dart';
 import 'package:best_touch_training/features/profile/presentation/screens/update_profile_screen.dart';
 import 'package:best_touch_training/features/reservation/presentation/screens/reservation_screen.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/additions_service_cubit/cubit/addition_services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/reservation_confirmation.screen.dart';
 import 'package:best_touch_training/features/services/presentation/screens/additions_services_screen.dart';
 import 'package:best_touch_training/features/services/presentation/screens/service_screen.dart';
 import 'package:best_touch_training/features/splash/presentation/screens/splash_screen.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/verification_code_screen.dart';
 import 'package:best_touch_training/features/language/presentation/screens/language.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRoutes {
   static Route? generateRoute(RouteSettings routeSettings) {
@@ -42,8 +46,7 @@ class AppRoutes {
       case Routes.home:
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case Routes.reservation:
-        return MaterialPageRoute(
-            builder: (context) => const ReservationScreen());
+        return MaterialPageRoute(builder: (context) => ReservationScreen());
       case Routes.notifications:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());
@@ -80,6 +83,13 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) {
           return const LocationScreen();
         });
+      // case Routes.reservationConfirmationScreen:
+      //   return MaterialPageRoute(builder: (context) {
+      //     return  ReservationConfirmationScreen(
+      //       // cubit: args,
+
+      //     );
+      //   });
       case Routes.additionsServices:
         return MaterialPageRoute(builder: (context) {
           return AdditionsServicesScreen(

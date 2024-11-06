@@ -46,6 +46,7 @@ class ServiceItem extends StatelessWidget {
                       route: Routes.additionsServices,
                       args: ContentParams(
                           washerId: landryDetails?.id,
+                          sizeName: serviceParams?.name,
                           sizeId: serviceParams?.sizeId,
                           serviceId: serviceItemModel.id,
                           description: serviceItemModel.description,
@@ -74,11 +75,13 @@ class ContentParams {
   final String? description;
   final String? name;
   final int? price;
+  final String? sizeName;
 
   ContentParams(
       {required this.description,
       required this.name,
       required this.price,
+      this.sizeName,
       required this.washerId,
       required this.sizeId,
       required this.serviceId});
