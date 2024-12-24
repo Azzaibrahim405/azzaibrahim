@@ -57,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 20.horizontalSpace,
                 Expanded(
                   child: LoyalityPackagesWidget(
+                    onTap: () =>
+                        navigate(context: context, route: Routes.packages),
                     title: 'الباقات',
                     image: AppAssets.packages,
                   ),

@@ -10,9 +10,11 @@ import 'package:best_touch_training/features/home/presentation/home/home_cubit.d
 import 'package:best_touch_training/features/laundry_profile/presentation/cubit/cubit/car_sizes_cubit_cubit.dart';
 import 'package:best_touch_training/features/laundry_profile/presentation/cubit/cubit/laundry_profile_cubit.dart';
 import 'package:best_touch_training/features/notifications/presentation/cubit/notifications_cubit.dart';
+import 'package:best_touch_training/features/packages/presentation/cubit/cubit/packages_cubit.dart';
 import 'package:best_touch_training/features/profile/presentation/cubit/cubit/update_profile_cubit.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/additions_service_cubit/cubit/addition_services_cubit.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/service_cubit/services_cubit.dart';
+import 'package:best_touch_training/features/reservation/presentation/cubit/reservation_cubit/reservation_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/additions_service/cubit/addition_services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/service/services_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,9 +39,11 @@ class BestTouchApp extends StatelessWidget {
                     BlocProvider(create: (context) => sl<CarSizesCubitCubit>()),
                     BlocProvider(
                         create: (context) => sl<LaundryProfileCubit>()),
+                    BlocProvider(create: (context) => sl<PackagesCubit>()),
+                    BlocProvider(create: (context) => sl<ReservationCubit>()),
                     BlocProvider(create: (context) => sl<ServicesCubit>()),
-               BlocProvider(create: (context) => sl<AdditionServicesCubit>()),
-
+                    BlocProvider(
+                        create: (context) => sl<AdditionServicesCubit>()),
                   ],
                   child: MaterialApp(
                     supportedLocales: const [

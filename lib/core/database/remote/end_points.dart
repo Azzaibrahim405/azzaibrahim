@@ -25,4 +25,10 @@ class EndPoints {
           required int washerId,
           required int sizeId}) =>
       '/api/additions?washer=$washerId&size=$sizeId&service=$serviceId';
+  static String getAllOrders({required String status}) =>
+      '/api/orders?status=$status';
+  static String ordersConfirmation = '/api/orders';
+  static String monthlyPackage = '/api/packages';
+  static String store = '/api/user-packages';
+  static String getPublicPackages = '/api/charges';
 }

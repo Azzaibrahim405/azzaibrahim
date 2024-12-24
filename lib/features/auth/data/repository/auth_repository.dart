@@ -16,6 +16,7 @@ import 'package:best_touch_training/features/auth/data/models/register_model/reg
 import 'package:best_touch_training/features/auth/data/models/verification_code_model/verification_code_data.dart';
 import 'package:best_touch_training/features/auth/data/models/verification_code_model/verification_rerquest.dart';
 import 'package:dartz/dartz.dart';
+
 class AuthRepository {
   Future<Either<String, User>> login(LoginRequest loginRequest) async {
     try {

@@ -1,16 +1,11 @@
-import 'package:best_touch_training/core/routes/routes.dart';
 import 'package:best_touch_training/core/service_locator/service_locator.dart';
 import 'package:best_touch_training/core/shared_widgets/custom_elevated_button.dart';
 import 'package:best_touch_training/core/shared_widgets/simple_appbar.dart';
 import 'package:best_touch_training/core/utils/app_colors.dart';
 import 'package:best_touch_training/core/utils/app_images.dart';
 import 'package:best_touch_training/core/utils/app_text_style.dart';
-import 'package:best_touch_training/core/utils/common_widgets.dart';
-
 import 'package:best_touch_training/core/utils/extensions.dart';
-import 'package:best_touch_training/features/auth/data/models/get_profile_model/get_profile_model/profile_data.dart';
 import 'package:best_touch_training/features/account/presentation/screens/components/custom_info_listile.dart';
-import 'package:best_touch_training/features/account/presentation/screens/components/profile_account_card_widget.dart';
 import 'package:best_touch_training/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:best_touch_training/features/profile/presentation/cubit/cubit/update_profile_cubit.dart';
 import 'package:best_touch_training/features/profile/presentation/screens/update_profile_screen.dart';

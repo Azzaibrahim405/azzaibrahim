@@ -41,12 +41,12 @@ class NewPasswordScreen extends StatelessWidget {
               showToast(
                   msg: "تم تغيير كلمه المرور بنجاح",
                   state: ToastStates.success);
-              showDialog(
-                  context: context,
-                  builder: (context) => CustomDialogWidget(
-                        image: AppAssets.resetPasswordSuccessfully,
-                        title: AppStrings.passwordResetSuccessfully.tr(context),
-                      ));
+              // showDialog(
+              //     context: context,
+              //     builder: (context) => CustomDialogWidget(
+              //           image: AppAssets.resetPasswordSuccessfully,
+              //           title: AppStrings.passwordResetSuccessfully.tr(context),
+              //         ));
               navigate(context: context, route: Routes.login);
             } else if (state is ResetPasswordErrorState) {
               showToast(msg: state.message, state: ToastStates.error);

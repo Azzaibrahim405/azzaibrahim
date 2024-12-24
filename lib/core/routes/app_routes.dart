@@ -1,5 +1,4 @@
 import 'package:best_touch_training/core/routes/routes.dart';
-import 'package:best_touch_training/core/service_locator/service_locator.dart';
 import 'package:best_touch_training/features/account/presentation/screens/account_view.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/forget_password.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/location_screen.dart';
@@ -11,19 +10,19 @@ import 'package:best_touch_training/features/laundry_profile/presentation/screen
 import 'package:best_touch_training/features/layout/presentation/screens/layout_screen.dart';
 import 'package:best_touch_training/features/loyality/presentation/screens/loyality_screen.dart';
 import 'package:best_touch_training/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:best_touch_training/features/packages/presentation/screens/form_data_screen.dart';
 import 'package:best_touch_training/features/packages/presentation/screens/packages_screen.dart';
 import 'package:best_touch_training/features/profile/presentation/screens/enter_password_screen.dart';
 import 'package:best_touch_training/features/profile/presentation/screens/update_profile_screen.dart';
 import 'package:best_touch_training/features/reservation/presentation/screens/reservation_screen.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/additions_service_cubit/cubit/addition_services_cubit.dart';
 import 'package:best_touch_training/features/services/presentation/reservation_confirmation.screen.dart';
+
 import 'package:best_touch_training/features/services/presentation/screens/additions_services_screen.dart';
 import 'package:best_touch_training/features/services/presentation/screens/service_screen.dart';
 import 'package:best_touch_training/features/splash/presentation/screens/splash_screen.dart';
 import 'package:best_touch_training/features/auth/presentation/screens/verification_code_screen.dart';
 import 'package:best_touch_training/features/language/presentation/screens/language.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRoutes {
   static Route? generateRoute(RouteSettings routeSettings) {
@@ -62,6 +61,8 @@ class AppRoutes {
             builder: (context) => LaundryProfileScreen(
                   id: args,
                 ));
+      case Routes.dataForm:
+        return MaterialPageRoute(builder: (context) =>  FormDataScreen());
       case Routes.account:
         return MaterialPageRoute(builder: (context) => const AccountView());
       case Routes.layout:
@@ -77,19 +78,16 @@ class AppRoutes {
                 ));
       case Routes.editProfile:
         return MaterialPageRoute(builder: (context) {
-          return UpdateProfileScreen();
+          return const UpdateProfileScreen();
         });
       case Routes.location:
         return MaterialPageRoute(builder: (context) {
           return const LocationScreen();
         });
-      // case Routes.reservationConfirmationScreen:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return  ReservationConfirmationScreen(
-      //       // cubit: args,
-
-      //     );
-      //   });
+      case Routes.reservationConfirmationScreen:
+        return MaterialPageRoute(builder: (context) {
+          return const ReservationConfirmationScreen();
+        });
       case Routes.additionsServices:
         return MaterialPageRoute(builder: (context) {
           return AdditionsServicesScreen(

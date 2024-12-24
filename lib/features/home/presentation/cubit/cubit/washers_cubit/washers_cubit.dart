@@ -6,7 +6,7 @@ part 'washers_state.dart';
 class WashersCubit extends Cubit<WashersState> {
   final HomeRepository homeRepo;
   WashersCubit(this.homeRepo) : super(WashersInitial());
-
+  Datum? datum;
   List<Datum> washers = [];
   void getAllWashers() async {
     emit(GetAllWahersLoadingState());

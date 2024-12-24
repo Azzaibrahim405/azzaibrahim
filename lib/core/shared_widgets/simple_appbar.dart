@@ -29,9 +29,8 @@ class SimpleAppBar extends PreferredSize {
                       onTap: () {
                         if (Navigator.canPop(context)) {
                           Navigator.pop(context);
-                        } 
-                                    print('No previous route');
-
+                        }
+                        print('No previous route');
                       },
                       child: Container(
                         decoration: BoxDecoration(

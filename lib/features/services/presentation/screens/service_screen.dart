@@ -7,7 +7,7 @@ import 'package:best_touch_training/core/shared_widgets/simple_appbar.dart';
 import 'package:best_touch_training/core/utils/common_widgets.dart';
 import 'package:best_touch_training/core/utils/extensions.dart';
 import 'package:best_touch_training/features/laundry_profile/presentation/screens/widgets/cars_type_widget.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/service_cubit/services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/service/services_cubit.dart';
 import 'package:best_touch_training/features/services/presentation/screens/widgets/service_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,6 @@ class ServiceScreen extends StatefulWidget {
   final ServiceParams serviceParams;
 
   const ServiceScreen({super.key, required this.serviceParams});
-
 
   @override
   State<ServiceScreen> createState() => _ServiceScreenState();

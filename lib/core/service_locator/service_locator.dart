@@ -12,11 +12,15 @@ import 'package:best_touch_training/features/laundry_profile/presentation/cubit/
 import 'package:best_touch_training/features/laundry_profile/presentation/cubit/cubit/laundry_profile_cubit.dart';
 import 'package:best_touch_training/features/notifications/data/repository/notifications_repository.dart';
 import 'package:best_touch_training/features/notifications/presentation/cubit/notifications_cubit.dart';
+import 'package:best_touch_training/features/packages/data/repo/packages_repository.dart';
+import 'package:best_touch_training/features/packages/presentation/cubit/cubit/packages_cubit.dart';
 import 'package:best_touch_training/features/profile/data/repository/update_profile_repository.dart';
 import 'package:best_touch_training/features/profile/presentation/cubit/cubit/update_profile_cubit.dart';
+import 'package:best_touch_training/features/reservation/data/repository/reservation_repository.dart';
+import 'package:best_touch_training/features/reservation/presentation/cubit/reservation_cubit/reservation_cubit.dart';
 import 'package:best_touch_training/features/services/data/repository/services_repository.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/additions_service_cubit/cubit/addition_services_cubit.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/service_cubit/services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/additions_service/cubit/addition_services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/service/services_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -50,4 +54,10 @@ void setupServiceLocator() {
   sl.registerLazySingleton<ServicesCubit>(() => ServicesCubit(sl()));
   sl.registerLazySingleton<AdditionServicesCubit>(
       () => AdditionServicesCubit(sl()));
+  sl.registerLazySingleton<ReservationRepository>(
+      () => ReservationRepository());
+  sl.registerLazySingleton<PackagesRepository>(() => PackagesRepository());
+  sl.registerLazySingleton<PackagesCubit>(() => PackagesCubit(sl()));
+
+  sl.registerLazySingleton(() => ReservationCubit(sl()));
 }

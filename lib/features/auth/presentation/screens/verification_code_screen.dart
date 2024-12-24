@@ -40,7 +40,7 @@ class VerificationCodeScreen extends StatelessWidget {
               Navigator.pushNamed(context, Routes.newPassword,
                   arguments: BlocProvider.of<AuthCubit>(context).resetToken);
 
-              showToast(
+              showToast(  
                   msg: 'لقد تم التحقق من شفره الدخول بنجاح',
                   state: ToastStates.success);
             } else if (state is VerificationFromPasswordErrorState) {
@@ -106,7 +106,10 @@ class VerificationCodeScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CustomTextButton(
-                    onPress: () {},
+                    onPress: () {
+                      
+
+                    },
                     text: AppStrings.resend.tr(context),
                     isUnderline: true,
                   ),

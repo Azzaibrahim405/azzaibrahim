@@ -8,7 +8,7 @@ import 'package:best_touch_training/core/utils/app_colors.dart';
 import 'package:best_touch_training/core/utils/app_text_style.dart';
 import 'package:best_touch_training/core/utils/common_widgets.dart';
 import 'package:best_touch_training/core/utils/extensions.dart';
-import 'package:best_touch_training/features/services/presentation/cubit/additions_service_cubit/cubit/addition_services_cubit.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/additions_service/cubit/addition_services_cubit.dart';
 import 'package:best_touch_training/features/services/presentation/screens/widgets/additions_item.dart';
 import 'package:best_touch_training/features/services/presentation/screens/widgets/custom_row.dart';
 import 'package:best_touch_training/features/services/presentation/screens/widgets/service_item.dart';
@@ -95,17 +95,25 @@ class _AdditionsServicesScreenState extends State<AdditionsServicesScreen> {
                         child: ListView.separated(
                           itemBuilder: (context, index) {
                             return AdditionsItem(
-                                additionModel: list[index],
-                                value: cubit.selectedIndex.contains(index),
-                                onChanged: (bool? val) => cubit.toggleCheckBox(
+                              additionModel: list[index],
+                              value: context
+                                  .read<AdditionServicesCubit>()
+                                  .selectedIndex
+                                  .contains(index),
+                              onChanged: (bool? val) {
+                                context
+                                    .read<AdditionServicesCubit>()
+                                    .toggleCheckBox(
+                                      additonModel: list[index],
                                       isSelected: val! ? true : false,
                                       price: widget.contentParams.price!
                                           .toDouble(),
                                       index: index,
                                       servicePrice:
                                           list[index].price!.toDouble(),
-                                    ));
-                                    
+                                    );
+                              },
+                            );
                           },
                           separatorBuilder: (context, index) =>
                               16.verticalSpace,
@@ -133,7 +141,7 @@ class _AdditionsServicesScreenState extends State<AdditionsServicesScreen> {
                 ),
                 Visibility(
                   visible: (cubit.totalPrice > 0 && cubit.additionPrice > 0),
-                  child: DottedLine(
+                  child: const DottedLine(
                     dashColor: AppColors.dashLineColor,
                   ),
                 ),
@@ -155,7 +163,6 @@ class _AdditionsServicesScreenState extends State<AdditionsServicesScreen> {
                 CustomElevatedButton(
                   text: 'احجز',
                   onPress: () {
-                    cubit.additionsList = list;
                     cubit.contentParams = widget.contentParams;
                     Navigator.pushNamed(
                       context,

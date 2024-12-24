@@ -18,5 +18,12 @@ class ApiKeys {
       code = 'code',
       avatar = 'avatar',
       //reset password keys
-      resetToken = 'token';
+      resetToken = 'token',
+      //orderConfirmation
+      washerId = 'washer_id',
+      serviceId = 'service_id',
+      additions = 'additions',
+      additionId = 'addition_id',
+      sizeId = 'size_id',
+      quantity = 'quantity';
 }

@@ -4,6 +4,7 @@ import 'package:best_touch_training/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: must_be_immutable
 class LoyalityPackagesWidget extends StatelessWidget {
   LoyalityPackagesWidget(
       {super.key, required this.title, required this.image, this.onTap});

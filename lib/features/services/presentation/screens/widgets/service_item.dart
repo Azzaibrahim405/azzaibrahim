@@ -8,6 +8,7 @@ import 'package:best_touch_training/core/utils/extensions.dart';
 import 'package:best_touch_training/features/laundry_profile/presentation/cubit/cubit/laundry_profile_cubit.dart';
 import 'package:best_touch_training/features/laundry_profile/presentation/screens/widgets/cars_type_widget.dart';
 import 'package:best_touch_training/features/services/data/models/get_service_model/service_item.dart';
+import 'package:best_touch_training/features/services/presentation/cubit/additions_service/cubit/addition_services_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,12 +42,14 @@ class ServiceItem extends StatelessWidget {
               CustomTextButton(
                 isUnderline: true,
                 onPress: () {
+                  context.read<AdditionServicesCubit>().checkList = [];
                   navigate(
                       context: context,
                       route: Routes.additionsServices,
                       args: ContentParams(
                           washerId: landryDetails?.id,
                           sizeName: serviceParams?.name,
+                          washerName: landryDetails?.name ?? '',
                           sizeId: serviceParams?.sizeId,
                           serviceId: serviceItemModel.id,
                           description: serviceItemModel.description,
@@ -70,6 +73,7 @@ class ServiceItem extends StatelessWidget {
 
 class ContentParams {
   final int? washerId;
+  final String? washerName;
   final int? sizeId;
   final int? serviceId;
   final String? description;
@@ -81,6 +85,7 @@ class ContentParams {
       {required this.description,
       required this.name,
       required this.price,
+      this.washerName,
       this.sizeName,
       required this.washerId,
       required this.sizeId,

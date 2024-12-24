@@ -5,7 +5,13 @@ class AdditionModel {
   bool? isFree;
   String? image;
 
-  AdditionModel({this.id, this.name, this.price, this.isFree, this.image,});
+  AdditionModel({
+    this.id,
+    this.name,
+    this.price,
+    this.isFree,
+    this.image,
+  });
 
   factory AdditionModel.fromJson(Map<String, dynamic> json) => AdditionModel(
         id: json['id'] as int?,

@@ -8,6 +8,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Function()? onPress;
   final double? width;
   final double? height;
+  final Color textColor;
   final Color? color;
   final Color? borderColor;
   const CustomElevatedButton(
@@ -17,7 +18,8 @@ class CustomElevatedButton extends StatelessWidget {
       this.height,
       this.color,
       this.width,
-      this.borderColor});
+      this.borderColor,
+      this.textColor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class CustomElevatedButton extends StatelessWidget {
           fit: BoxFit.fitWidth,
           child: Text(
             text ?? '',
-            style: semiBold(size: 16, color: AppColors.onPrimary),
+            style: semiBold(size: 16, color: textColor),
           ),
         ),
       ),

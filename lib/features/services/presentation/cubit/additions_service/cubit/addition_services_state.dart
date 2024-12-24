@@ -17,4 +17,15 @@ final class AdditionServicesError extends AdditionServicesState {
 
   AdditionServicesError({required this.message});
 }
+
 final class ToggleSuccessState extends AdditionServicesState {}
+
+class OrdersConfirmationLoading extends AdditionServicesState {}
+
+class OrdersConfirmationSuccess extends AdditionServicesState {}
+
+class OrdersConfirmationError extends AdditionServicesState {
+  final String message;
+
+  OrdersConfirmationError({required this.message});
+}
